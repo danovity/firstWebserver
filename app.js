@@ -3,9 +3,17 @@ const PORT = 8000;
 
 // a function which handles requests and sends response
 function requestHandler(request, response) {
-  response.end(
+  if (request.url == "/") {
+    response.end("Welcome!");
+  } else if (request.url == "/urls") {
+    response.end("www.lighthouselabs.ca\nwww.google.com");
+  } else {
+    response.statusCode = 404;
+    response.end("Unknown Path");
+  }
+  /*   response.end(
     `Requested Path: ${request.url}\nRequest Method: ${request.method}`
-  );
+  ); */
 }
 
 var server = http.createServer(requestHandler);
